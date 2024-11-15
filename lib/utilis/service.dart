@@ -125,6 +125,38 @@ class ServiceNotifier extends StateNotifier<List<Service>> {
     }
   }
 
+  Future<String> getServiceAIDetailsFromAPI({
+    required String itemName,
+    required String carName,
+  }) async {
+    final url = Uri.parse('$baseUrl/service-ai');
+
+    try {
+      final response = await http.post(
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          "carName": carName,
+          "itemName": itemName,
+        }),
+      );
+
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200 && data['details'] != null) {
+        final serviceAiDetails = data['details'];
+        print('Service AI Details: $serviceAiDetails'); // Debugging
+        return serviceAiDetails;
+      } else {
+        throw Exception('Failed to load service details');
+      }
+    } catch (e) {
+      throw Exception('Error fetching service AI details: $e');
+    }
+  }
+
   Future<String> deleteService({
     required String token,
     required int id,

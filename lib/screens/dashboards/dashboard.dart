@@ -22,6 +22,8 @@ class Dashboard extends StatelessWidget {
           children: [
             NewsFeedScreen(), // Wrap your ListView inside Expanded or Flexible
             // const SizedBox(height: 20),
+            MainServicesList(),
+            const SizedBox(height: 5),
             CarDetailsSlider(), // Include CarDetailsSlider with data passed
             const SizedBox(height: 20),
             DriverNecessities(),
@@ -29,8 +31,6 @@ class Dashboard extends StatelessWidget {
             FuelPriceSlider(),
             const SizedBox(height: 10),
             PlanToBuySlider(),
-            const SizedBox(height: 20),
-            MainServicesList(),
             const SizedBox(height: 20),
             PreferencesSlider(),
             const SizedBox(height: 20),
